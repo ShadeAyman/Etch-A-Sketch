@@ -2,12 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #82C3EC;
+    color: #F1F6F5;
 }
 body
 {
-    background-color: #472183;
-    background-color: #472183;
+    background-color: #4B56D2;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -18,8 +17,10 @@ button
     padding: 10px 20px;
     border-radius: 20px;
     width: 150px;
-
+    background-color: #472183;
+    border-color: #82C3EC;
 }
+
 .COLORS{
    color:#472183;
     color:#4B56D2;
@@ -27,7 +28,6 @@ button
     color: #F1F6F5;
 }
 .header {
-    background-color:#472183;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +41,6 @@ button
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #472183;
     flex: 1;
 }
 
@@ -49,7 +48,6 @@ button
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #472183;
     width: 200PX;
 }
 .buttonscontainer
@@ -81,11 +79,13 @@ button
 }
 .cell
 {
-    color: black;
-    border-color: black;
-    border: solid;
     align-self: stretch;
-    border-width: 0.5px;
+}
+.bordercell
+{
+    color: black;
+    border: solid;
+    border-width: 0.1px;
 }
 #slider
 {
@@ -100,6 +100,5 @@ button
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-color: #472183;
 }
 
