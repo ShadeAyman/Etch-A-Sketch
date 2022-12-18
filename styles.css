@@ -7,6 +7,18 @@
 body
 {
     background-color: #472183;
+    background-color: #472183;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+button
+{
+
+    padding: 10px 20px;
+    border-radius: 20px;
+    width: 150px;
+
 }
 .COLORS{
    color:#472183;
@@ -14,16 +26,7 @@ body
     color: #82C3EC;
     color: #F1F6F5;
 }
-
-.container {
-    background-color: #472183;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
 .header {
-    grid-area: header;
     background-color:#472183;
     display: flex;
     justify-content: center;
@@ -34,35 +37,39 @@ body
 }
 
 .body {
-    grid-area: body;
+    flex-wrap: wrap;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #472183;
+    flex: 1;
 }
 
 #buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    grid-area: buttons;
-    background-color: #4B56D2;
-    width: 15%;
-
+    background-color: #472183;
+    width: 200PX;
 }
 .buttonscontainer
 {
     padding: 40px;
     display: flex;
     flex-direction: column;
-}
-#gridContainerbody{
-    flex-direction: column;
-    display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #82C3EC;
-    width: 60%;
+    gap: 40px;
 }
+.coantintcontaner
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #gridContainer {
-    grid-area: gridcontainer;
     display: grid;
     background-color: white;
     margin: 40px;
@@ -70,11 +77,22 @@ body
     height: 450px;
     border-radius: 20px;
     padding: 10px;
+
+}
+.cell
+{
+    color: black;
+    border-color: black;
+    border: solid;
+    align-self: stretch;
+    border-width: 0.5px;
 }
 #slider
 {
-    grid-area: slider;
-    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
 }
 
 .footer {
@@ -82,6 +100,6 @@ body
     justify-content: center;
     align-items: center;
     padding: 20px;
-    grid-area: footer;
     background-color: #472183;
 }
+

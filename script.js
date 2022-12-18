@@ -5,8 +5,10 @@ const slider = document.getElementById("slider");
 const sliderDisplay = document.getElementById("display");
 const removecell =document.getElementsByClassName('cell');
 const cellclass = document.getElementsByClassName("cell");
+const clearButton = document.getElementById("clear");
+
 //functions
-function gridbuilder (columns , rows) //a function that builds cells
+function gridbuilder (columns =slider.value , rows =slider.value) //a function that builds cells
 {
     deletElements();
     gridcontainer.style.gridTemplateColumns = " repeat("+columns+", 1fr)";
@@ -31,9 +33,10 @@ slider.oninput = function() {
     sliderDisplay.innerHTML = this.value+"x"+this.value;
 };
 //-------------------------------------------------------
+gridbuilder (slider.value , slider.value)
+  slider.addEventListener('input',()=>gridbuilder ());
 
-//--------------trying to make the slider change the count-----////
-//note to self:
-///if this failed do buttons 16 32 64
-  slider.addEventListener('input',gridbuilder (slider.value , slider.value));
-
+    clearButton.addEventListener('click',
+    ()=>{deletElements();
+    gridbuilder();}
+    );
