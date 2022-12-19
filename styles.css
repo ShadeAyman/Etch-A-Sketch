@@ -5,13 +5,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #F1F6F5;
+    color: #393E46;
     font-family: NerkoOne;
 }
 
 body
 {
-    background-color: #4B56D2;
+    background-color: #F7F7F7;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -22,16 +22,16 @@ button
     padding: 10px 20px;
     border-radius: 20px;
     width: 150px;
-    background-color: #472183;
-    border-color: #82C3EC;
+    background-color: #EEEEEE;
+    border-color: #929AAB;
+}
+button:hover
+{
+background-color:#929AAB ;
+border-color: #EEEEEE;
 }
 
-.COLORS{
-   color:#472183;
-    color:#4B56D2;
-    color: #82C3EC;
-    color: #F1F6F5;
-}
+
 /* --------------------------- */
 .header {
     display: flex;
@@ -43,48 +43,40 @@ button
 }
 
 .body {
-    flex-wrap: wrap;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1;
+    flex: 1 1 auto;
+    gap: 100px;
 
 }
 
-#buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 200px;
 
-}
 .buttonscontainer
 {
-    padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 40px;
+    height: 450px;
+    justify-content: space-between;
+    padding: 20px;
 }
-.coantintcontaner
+#colorpicker
 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    
-    align-items: center;
+    padding:0px;
+    width: 150px;
+    height: 50px;
+    background-color: #EEEEEE;
+    border-color: #929AAB;
 }
-
 #gridContainer {
     display: grid;
+    flex-shrink: 0;
     background-color: white;
-    margin: 40px;
     width: 450px;
     height: 450px;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 10px;
-
 }
 .cell
 {
@@ -92,7 +84,7 @@ button
 }
 .bordercell
 {
-    color: black;
+    color: #929AAB;
     border: solid;
     border-width: 0.1px;
 }
@@ -101,7 +93,7 @@ button
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 200px;
+    width: 150px;
 }
 
 .footer {
@@ -112,9 +104,11 @@ button
 
 }
 
-@media (min-width: 1250px){
-
-    .body
+@media (max-width: 750px){
+.body{
+    flex-wrap: wrap;
+}
+    .buttonscontainer
     {
         order: 2;
     }

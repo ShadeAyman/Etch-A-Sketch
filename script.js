@@ -10,45 +10,36 @@ const Lighten = document.getElementById("lighten");
 const clearButton = document.getElementById("clear");
 const brushToggle = document.getElementById("toggle");
 const eraser = document.getElementById('eraser');
+const toggleGrid = document.getElementById('toggleGrid')
+
 //defualt 
 let isToggle = false;
 let grid = true;
 let usedbrush="black";
-const toggleGrid = document.getElementById('toggleGrid')
+
+////////////////////////////////////////////////
 gridbuilder(slider.value, slider.value);
 sliderDisplay.innerHTML = slider.value + "x" + slider.value;
 //--------------functions--------------//
-//a function that builds cells
+//a function that builds the grid
 function gridbuilder(columns = slider.value, rows = slider.value) {
-    deletElements();
+    deletElements();// to delete the grid before adding it again
     gridcontainer.style.gridTemplateColumns = " repeat(" + columns + ", 1fr)";
     gridcontainer.style.gridTemplateRows = " repeat(" + rows + ", 1fr)";
     let cellcount = columns * rows;
     for (let i = 1; i <= cellcount; i++) {
         gridcontainer.appendChild(cell.cloneNode());
     }
-    toggleGridbutton()
-    usedBrushFunction();
+    toggleGridbutton()//to hilight the cells
+    usedBrushFunction();//to use the last brush
 }
-function deletElements()//remove elments
+function deletElements()//delet the grid
 {
     while (gridcontainer.lastElementChild) {
         gridcontainer.removeChild(gridcontainer.lastElementChild)
     }
 }
-function toggleGridbutton()
-{
-    if (grid === true) {
-        for (const x of cellclass) {
-            x.classList.add("bordercell")
-        }
-    }
-    else {
-        for (const x of cellclass) {
-            x.classList.remove("bordercell")
-        }
-    }
-}
+
 //-------------to show the slide value and update it
 sliderDisplay.innerHTML = slider.value + "x" + slider.value;
 slider.oninput = function () {
@@ -56,8 +47,22 @@ slider.oninput = function () {
 };
 //-------------------------------------------------------
 ////////////////////////////////////
+function usedBrushFunction() //to toggle brushes
+{
+    if (usedbrush == "black")
+    {
+        blackbrush();
+    }
+    else if (usedbrush == "rainbow")
+    {
+        rainbowBrush();
+    }
+    else if (usedbrush == "eraser")
+    {
+        eraserbrush();
+    }
+}
 function blackbrush() {
-
     if (isToggle == true) {
         for (const x of cellclass) {
             x.addEventListener('mouseover', () => {
@@ -112,30 +117,31 @@ function eraserbrush(){
         }
     }
 }
-function usedBrushFunction()
-{
-    if (usedbrush == "black")
-    {
-        blackbrush();
-    }
-    else if (usedbrush == "rainbow")
-    {
-        rainbowBrush();
-    }
-    else if (usedbrush == "eraser")
-    {
-        eraserbrush();
-    }
-}
-function random(number) {
+
+function random(number) { //to use in the rainbow brush
     return Math.floor(Math.random() * (number + 1));
+}
+function toggleGridbutton()//to trun the grid highlight on and off
+{
+    if (grid === true) {
+        for (const x of cellclass) {
+            x.classList.add("bordercell")
+        }
+    }
+    else {
+        for (const x of cellclass) {
+            x.classList.remove("bordercell")
+        }
+    }
 }
 //----------------------Listeners-------------//
 slider.addEventListener('input', () => gridbuilder());
+
 clearButton.addEventListener('click', //to clear the tiles and redrow them
     () => {
         deletElements();
         gridbuilder();
+        usedBrushFunction();
     }
 );
 Black.addEventListener('click', () => {
