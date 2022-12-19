@@ -1,9 +1,14 @@
+/* ------------Genarics---------------- */
+@font-face { font-family: NerkoOne; src: url('NerkoOne-Regular.ttf'); } 
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     color: #F1F6F5;
+    font-family: NerkoOne;
 }
+
 body
 {
     background-color: #4B56D2;
@@ -27,6 +32,7 @@ button
     color: #82C3EC;
     color: #F1F6F5;
 }
+/* --------------------------- */
 .header {
     display: flex;
     justify-content: center;
@@ -42,13 +48,15 @@ button
     justify-content: center;
     align-items: center;
     flex: 1;
+
 }
 
 #buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200PX;
+    width: 200px;
+
 }
 .buttonscontainer
 {
@@ -64,6 +72,7 @@ button
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
     align-items: center;
 }
 
@@ -100,5 +109,13 @@ button
     justify-content: center;
     align-items: center;
     padding: 20px;
+
 }
 
+@media (min-width: 1250px){
+
+    .body
+    {
+        order: 2;
+    }
+}

@@ -9,9 +9,12 @@ const Black = document.getElementById("black");
 const Lighten = document.getElementById("lighten");
 const clearButton = document.getElementById("clear");
 const Toggle = document.getElementById("toggle");
-//defualt values
+//defualt 
+let isToggle=false;
+
 let usedbursh = "Black";
-let isToggle = false;
+let grid = true;
+const toggleGrid =document.getElementById('toggleGrid')
 gridbuilder(slider.value, slider.value);
 //--------------functions--------------//
 //a function that builds cells
@@ -38,14 +41,30 @@ slider.oninput = function () {
     sliderDisplay.innerHTML = this.value + "x" + this.value;
 };
 //-------------------------------------------------------
+//////the toggle bullshit/////////
+
+function updateToggle()
+{
+    if(isToggle === false) {
+        brush(usedbursh);
+
+        isToggle = true;
+    }
+    else {
+        brush(usedbursh);
+        isToggle = false;
+    }
+    console.log(isToggle);
+}
+Toggle.addEventListener('click', updateToggle);
+////////////////////////////////////
 function brush(brushtype) {
     if (brushtype === "Rainbow") {
-        if (isToggle == true) {
+        if (isToggle === true) {
             for (const x of cellclass) {
                 x.addEventListener('mouseover', () => {
                     x.style.backgroundColor = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
                     x.style.transition= "background-color 1.0s ease";
-
                 })
             }
         }
@@ -59,7 +78,7 @@ function brush(brushtype) {
             }
         }
     }
-    if (brushtype === "Black") {
+    else if (brushtype === "Black") {
         if (isToggle == true) {
             for (const x of cellclass) {
                 x.addEventListener('mouseover', () => {
@@ -78,21 +97,7 @@ function brush(brushtype) {
             }
         }
     }
-    if (brushtype === "Lighten") {
-        if (isToggle == true) {
-            for (const x of cellclass) {
-                x.addEventListener('mouseover', () => {
-                    x.style.backgroundColor = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
-                })
-            }
-        }
-        else {
-            for (const x of cellclass) {
-                x.addEventListener('mousedown', () => {
-                    x.style.backgroundColor = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
-                })
-            }
-        }
+    else if (brushtype === "Lighten") {
     }
 }
 
@@ -101,17 +106,7 @@ function random(number) {
 }
 
 
-function updateToggle()
-{
-    if(isToggle === false) {
-        isToggle = true;
-    }
-    else {
-        isToggle = false;
-    }
-    console.log(isToggle);
-    brush(usedbursh);
-}
+
 //----------------------Listeners-------------//
 slider.addEventListener('input', () => gridbuilder());
 
@@ -121,7 +116,6 @@ clearButton.addEventListener('click', //to clear the tiles and redrow them
         gridbuilder();
     }
 );
-Toggle.addEventListener('click', updateToggle);
 
 Rainbow.addEventListener('click', () => {
     usedbursh = "Rainbow";
@@ -138,3 +132,19 @@ Lighten.addEventListener('click', () => {
     brush(usedbursh)
 }
 )
+
+toggleGrid.addEventListener('click',()=>{
+    if (grid === true) {
+        for (const x  of cellclass) {
+        x.classList.add("bordercell")
+        grid = false;
+    }
+    }
+    else
+    {
+        for (const x  of cellclass) {
+            x.classList.remove("bordercell")
+            grid=true;
+        }
+    }
+})
