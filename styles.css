@@ -45,8 +45,9 @@ border-color: #EEEEEE;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     padding: 20px;
-    font-size: 5em;
+    font-size: 4em;
 }
 
 .body {
@@ -119,6 +120,11 @@ border-color: #EEEEEE;
 }
 
 @media (max-width: 750px){
+    #header
+    {
+        font-size: 3em;
+
+    }
 .body{
     flex-wrap: wrap;
 }
