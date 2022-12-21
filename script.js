@@ -1,44 +1,52 @@
+///////////////////////////////////////////////////////////////////////
+//////the old brush function was very claky and bad               ////
+//////and i had to toggle between click to drow and hover to darw////
+//////after i saw how clean michalosman code ws                  ///
+////// (https://github.com/michalosman/etch-a-sketch)        //////
+//////relised how bad my function was so i rewrote it       //////
+//////the old function now exists in another branch        //////
+////////////////////////////////////////////////////////////////
+const header = document.getElementById("header");
 const gridcontainer = document.getElementById('gridContainer');
-const cell = document.createElement("div");
-cell.classList.add('cell');
 const slider = document.getElementById("slider");
 const sliderDisplay = document.getElementById("display");
 const cellclass = document.getElementsByClassName("cell");
+const toggleGrid = document.getElementById('toggleGrid');
+const colorpicker = document.getElementById('colorpicker');
+const footer = document.getElementById('footer');
+const mainBrushButton =document.getElementById("mainBrush");
+const rainbowBrushButton =document.getElementById("Rainbow");
+const eraserBrushButton = document.getElementById("eraser");
 const clearButton = document.getElementById("clear");
-const toggleGrid = document.getElementById('toggleGrid')
-const colorpicker = document.getElementById('colorpicker')
-const footer = document.getElementById('footer')
+//-------------defualt values----------//
 let mousedown=false;
-
-//defualt values
 let isToggle = false;
 let grid = true;
 let color = "black"
-let brushType= "rainbowBrush";
+let brushType= "mainBrush";
 gridbuilder(slider.value, slider.value);
 sliderDisplay.innerHTML = slider.value + "x" + slider.value;
 //--------------functions--------------//
 //a function that builds the grid
 function gridbuilder(columns = slider.value, rows = slider.value) {
-    deletElements();// to delete the grid before adding it again
+    deletElements();// to delete the old grid before generating it again
     gridcontainer.style.gridTemplateColumns = " repeat(" + columns + ", 1fr)";
     gridcontainer.style.gridTemplateRows = " repeat(" + rows + ", 1fr)";
-    let cellcount = columns * rows;
-    for (let i = 1; i <= cellcount; i++) {
+    for (let i = 1; i <= columns * rows; i++) {
         const cell = document.createElement("div");
         cell.classList.add('cell');
         cell.addEventListener("mousedown",brushPicker);
         cell.addEventListener("mouseover",brushPicker);
         gridcontainer.appendChild(cell);
     }
-    toggleGridbutton()//to hilight the cells
+    toggleGridbutton()//to check for the grid value
 }
 //delets the grid 
 function deletElements() {
     gridcontainer.innerHTML = ''
 }
 //brush 2.0
-function brushPicker(e)
+function brushPicker(e)//check for the used bursh and call its function
 {
     if(brushType == "mainBrush")
     {
@@ -54,28 +62,7 @@ function brushPicker(e)
         eracerBrush(e)
     }
 }
-const mainBrushButton =document.getElementById("mainBrush");
-const rainbowBrushButton =document.getElementById("Rainbow");
-const eraserBrushButton = document.getElementById("eraser");
-
-mainBrushButton.addEventListener('click',()=>
-{
-    brushType = "mainBrush" ;
-    brushPicker;
-} )
-
-rainbowBrushButton.addEventListener('click',()=>
-{
-    brushType = "rainbowBrush" ;
-    brushPicker;
-} )
-
-eraserBrushButton.addEventListener('click',()=>
-{
-    brushType = "eracer" ;
-    brushPicker;
-} )
-
+// the brushes
 function mainBrush(e) {
     if (e.type === 'mouseover' && !mousedown) return;
     e.target.style.backgroundColor = color;
@@ -85,13 +72,15 @@ function rainbowBrush(e) {
     e.target.style.backgroundColor = randomcolor();
     rainbowBrushButton.style.color=randomcolor()
     rainbowBrushButton.style.borderColor=randomcolor()
+    gridcontainer.style.borderColor=randomcolor();
+    header.style.color = randomcolor();
+
 }
 function eracerBrush(e)
 {
     if (e.type === 'mouseover' && !mousedown) return;
     e.target.style.backgroundColor = "white";
 }
-
 //shows the slide value and update it
 slider.oninput = function () {
     sliderDisplay.innerHTML = this.value + "x" + this.value;
@@ -101,7 +90,6 @@ function random(number) {
     return Math.floor(Math.random() * (number + 1));
 }
 function randomcolor() {
-
     return `rgb(${random(255)}, ${random(255)}, ${random(255)})`
 };
 //---------------------------------
@@ -119,7 +107,6 @@ function toggleGridbutton()
         }
     }
 }
-
 //---------------Listeners-------------//
 document.onmousedown= ()=> {mousedown=true;};
 document.onmouseup= ()=> {mousedown=false;};
@@ -127,7 +114,25 @@ colorpicker.onchange=function currentcolor(e) {
     color = e.target.value;
     mainBrushButton.style.color=color;
     mainBrushButton.style.borderColor=color;
+    gridcontainer.style.borderColor=color;
+    header.style.color = color;
+    brushPicker();
 };
+mainBrushButton.addEventListener('click',()=>
+{
+    brushType = "mainBrush" ;
+    brushPicker;
+} )
+rainbowBrushButton.addEventListener('click',()=>
+{
+    brushType = "rainbowBrush" ;
+    brushPicker;
+} )
+eraserBrushButton.addEventListener('click',()=>
+{
+    brushType = "eracer" ;
+    brushPicker;
+} )
 //Redrow the grid
 clearButton.addEventListener('click', 
     () => {
@@ -147,13 +152,9 @@ toggleGrid.addEventListener('click', () => {
     }
     toggleGridbutton()
 })
-//to toggle (hover to drow/click to draw)
-
-
 //the rainbow colored header is taken from this stackoverflow
 //https://stackoverflow.com/questions/36793529/how-to-generate-rainbow-colored-text-in-javascript
 window.addEventListener("load", function () {
-    generateRainbowText(header);
     generateRainbowText(footer)
 });
 function generateRainbowText(element) {
