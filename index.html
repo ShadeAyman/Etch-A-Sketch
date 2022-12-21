@@ -11,12 +11,12 @@
     <script src="script.js" defer></script>
 </head>
 
-<body>
+<body ondragstart="return false;" ondrop="return false;">
     <header id="header">Etch-A-Sketch</header>
     <div class="body">
         <div class="buttonscontainer">
             <input type="color" id="colorpicker" value="#000000">
-            <button id="brush">brush</button>
+            <button id="mainBrush">brush</button>
             <button id="Rainbow">Random Rainbow</button>
             <button id="eraser">Eraser</button>
             <button id="clear">Clear</button>
@@ -25,7 +25,6 @@
                 <p>grid:<span id="display"></span></p>
             </div>
             <button id="toggleGrid">toggle Grid</button>
-            <button id="toggle">Toggle brush</button>
         </div>
         <div id="gridContainer">
         </div>
