@@ -106,7 +106,13 @@ border-color: #EEEEEE;
     justify-content: center;
     width: 150px;
 }
-
+div>p{
+    font-size: 20px;
+}
+p
+{
+    text-align: center;
+}
 #footer {
     display: flex;
     justify-content: center;
@@ -124,6 +130,10 @@ border-color: #EEEEEE;
     {
         font-size: 3em;
 
+    }
+    #gridContainer {
+        width: 380px;
+        height: 380px;
     }
 .body{
     flex-wrap: wrap;
