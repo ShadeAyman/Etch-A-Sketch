@@ -1,11 +1,3 @@
-///////////////////////////////////////////////////////////////////////
-//////the old brush function was very claky and bad               ////
-//////and i had to toggle between click to drow and hover to darw////
-//////after i saw how clean michalosman code ws                  ///
-////// (https://github.com/michalosman/etch-a-sketch)        //////
-//////relised how bad my function was so i rewrote it       //////
-//////the old function now exists in another branch        //////
-////////////////////////////////////////////////////////////////
 const header = document.getElementById("header");
 const gridcontainer = document.getElementById('gridContainer');
 const slider = document.getElementById("slider");
@@ -19,9 +11,8 @@ const rainbowBrushButton =document.getElementById("Rainbow");
 const eraserBrushButton = document.getElementById("eraser");
 const clearButton = document.getElementById("clear");
 //-------------defualt values----------//
-let mousedown=false;
-let isToggle = false;
-let grid = true;
+let mousedown=false;//to help with the click and drag functionality
+let grid = true;//to start with the grid highlited
 let color = "black"
 let brushType= "mainBrush";
 gridbuilder(slider.value, slider.value);
@@ -63,8 +54,16 @@ function brushPicker(e)//check for the used bursh and call its function
     }
 }
 // the brushes
-function mainBrush(e) {
-    if (e.type === 'mouseover' && !mousedown) return;
+//////////////////////////////////////////////////////////////////////////
+//////the old brush function was not as good as i would like it to be////
+//////and i had to toggle between click to draw and hover to darw   ////
+//////after i saw this michalosman's code i understood how simple  ////
+////// it is to make a point and drag brush so i rewrote it       ////
+////// michalosman's code:                                       ////
+////// (https://github.com/michalosman/etch-a-sketch)           ////
+///////////////////////////////////////////////////////////////////
+function mainBrush(e) { 
+    if (e.type === 'mouseover' && !mousedown) return; //the idea is if iam not clicking over the element it wont draw unlike the old brush
     e.target.style.backgroundColor = color;
 }
 function rainbowBrush(e) {
@@ -74,7 +73,6 @@ function rainbowBrush(e) {
     rainbowBrushButton.style.borderColor=randomcolor()
     gridcontainer.style.borderColor=randomcolor();
     header.style.color = randomcolor();
-
 }
 function eracerBrush(e)
 {
@@ -144,7 +142,6 @@ slider.addEventListener('input', () => gridbuilder());
 //toggle grid on or off
 toggleGrid.addEventListener('click', () => {
     if (grid === true) {
-
         grid = false;
     }
     else {
