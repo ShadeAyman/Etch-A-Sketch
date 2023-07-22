@@ -1,55 +1,52 @@
 const header = document.getElementById("header");
-const gridcontainer = document.getElementById('gridContainer');
+const gridContainer = document.getElementById('gridContainer');
 const slider = document.getElementById("slider");
 const sliderDisplay = document.getElementById("display");
-const cellclass = document.getElementsByClassName("cell");
+const cellClass = document.getElementsByClassName("cell");
 const toggleGrid = document.getElementById('toggleGrid');
-const colorpicker = document.getElementById('colorpicker');
+const colorPicker = document.getElementById('colorpicker');
 const footer = document.getElementById('footer');
-const mainBrushButton =document.getElementById("mainBrush");
-const rainbowBrushButton =document.getElementById("Rainbow");
+const mainBrushButton = document.getElementById("mainBrush");
+const rainbowBrushButton = document.getElementById("Rainbow");
 const eraserBrushButton = document.getElementById("eraser");
 const clearButton = document.getElementById("clear");
 //-------------defualt values----------//
-let mousedown=false;//to help with the click and drag functionality
+let mouseDown = false;//to help with the click and drag functionality
 let grid = true;//to start with the grid highlited
 let color = "black"
-let brushType= "mainBrush";
-gridbuilder(slider.value, slider.value);
+let brushType = "mainBrush";
+gridBuilder(slider.value, slider.value);
 sliderDisplay.innerHTML = slider.value + "x" + slider.value;
 //--------------functions--------------//
 //a function that builds the grid
-function gridbuilder(columns = slider.value, rows = slider.value) {
+function gridBuilder(columns = slider.value, rows = slider.value) {
     deletElements();// to delete the old grid before generating it again
-    gridcontainer.style.gridTemplateColumns = " repeat(" + columns + ", 1fr)";
-    gridcontainer.style.gridTemplateRows = " repeat(" + rows + ", 1fr)";
+    gridContainer.style.gridTemplateColumns = " repeat(" + columns + ", 1fr)";
+    gridContainer.style.gridTemplateRows = " repeat(" + rows + ", 1fr)";
     for (let i = 1; i <= columns * rows; i++) {
         const cell = document.createElement("div");
         cell.classList.add('cell');
-        cell.addEventListener("mousedown",brushPicker);
-        cell.addEventListener("mouseover",brushPicker);
-        gridcontainer.appendChild(cell);
+        cell.addEventListener("mousedown", brushPicker);
+        cell.addEventListener("mouseover", brushPicker);
+        gridContainer.appendChild(cell);
     }
     toggleGridbutton()//to check for the grid value
 }
 //delets the grid 
 function deletElements() {
-    gridcontainer.innerHTML = ''
+    gridContainer.innerHTML = ''
 }
 //brush 2.0
 function brushPicker(e)//check for the used bursh and call its function
 {
-    if(brushType == "mainBrush")
-    {
+    if (brushType == "mainBrush") {
         mainBrush(e);
     }
 
-    if(brushType == "rainbowBrush")
-    {
+    if (brushType == "rainbowBrush") {
         rainbowBrush(e);
     }
-    if (brushType=="eracer") 
-    {
+    if (brushType == "eracer") {
         eracerBrush(e)
     }
 }
@@ -62,21 +59,20 @@ function brushPicker(e)//check for the used bursh and call its function
 ////// michalosman's code:                                       ////
 ////// (https://github.com/michalosman/etch-a-sketch)           ////
 ///////////////////////////////////////////////////////////////////
-function mainBrush(e) { 
-    if (e.type === 'mouseover' && !mousedown) return; //the idea is if iam not clicking over the element it wont draw unlike the old brush
+function mainBrush(e) {
+    if (e.type === 'mouseover' && !mouseDown) return; //the idea is if iam not clicking over the element it wont draw unlike the old brush
     e.target.style.backgroundColor = color;
 }
 function rainbowBrush(e) {
-    if (e.type === 'mouseover' && !mousedown) return;
+    if (e.type === 'mouseover' && !mouseDown) return;
     e.target.style.backgroundColor = randomcolor();
-    rainbowBrushButton.style.color=randomcolor()
-    rainbowBrushButton.style.borderColor=randomcolor()
-    gridcontainer.style.borderColor=randomcolor();
+    rainbowBrushButton.style.color = randomcolor()
+    rainbowBrushButton.style.borderColor = randomcolor()
+    gridContainer.style.borderColor = randomcolor();
     header.style.color = randomcolor();
 }
-function eracerBrush(e)
-{
-    if (e.type === 'mouseover' && !mousedown) return;
+function eracerBrush(e) {
+    if (e.type === 'mouseover' && !mouseDown) return;
     e.target.style.backgroundColor = "white";
 }
 //shows the slide value and update it
@@ -84,7 +80,7 @@ slider.oninput = function () {
     sliderDisplay.innerHTML = this.value + "x" + this.value;
 };
 //random number function used in the rainbow brush
-function random(number) { 
+function random(number) {
     return Math.floor(Math.random() * (number + 1));
 }
 function randomcolor() {
@@ -92,53 +88,49 @@ function randomcolor() {
 };
 //---------------------------------
 //-adds\removes a predefined css class with border style
-function toggleGridbutton()
-{
+function toggleGridbutton() {
     if (grid === true) {
-        for (const x of cellclass) {
+        for (const x of cellClass) {
             x.classList.add("bordercell")
         }
     }
     else {
-        for (const x of cellclass) {
+        for (const x of cellClass) {
             x.classList.remove("bordercell")
         }
     }
 }
 //---------------Listeners-------------//
-document.onmousedown= ()=> {mousedown=true;};
-document.onmouseup= ()=> {mousedown=false;};
-colorpicker.onchange=function currentcolor(e) {
+document.onmousedown = () => { mouseDown = true; };
+document.onmouseup = () => { mouseDown = false; };
+colorPicker.onchange = function currentcolor(e) {
     color = e.target.value;
-    mainBrushButton.style.color=color;
-    mainBrushButton.style.borderColor=color;
-    gridcontainer.style.borderColor=color;
+    mainBrushButton.style.color = color;
+    mainBrushButton.style.borderColor = color;
+    gridContainer.style.borderColor = color;
     header.style.color = color;
     brushPicker();
 };
-mainBrushButton.addEventListener('click',()=>
-{
-    brushType = "mainBrush" ;
+mainBrushButton.addEventListener('click', () => {
+    brushType = "mainBrush";
     brushPicker;
-} )
-rainbowBrushButton.addEventListener('click',()=>
-{
-    brushType = "rainbowBrush" ;
+})
+rainbowBrushButton.addEventListener('click', () => {
+    brushType = "rainbowBrush";
     brushPicker;
-} )
-eraserBrushButton.addEventListener('click',()=>
-{
-    brushType = "eracer" ;
+})
+eraserBrushButton.addEventListener('click', () => {
+    brushType = "eracer";
     brushPicker;
-} )
+})
 //Redrow the grid
-clearButton.addEventListener('click', 
+clearButton.addEventListener('click',
     () => {
-        gridbuilder();
+        gridBuilder();
     }
 );
 //resize the grid based on the slider value
-slider.addEventListener('input', () => gridbuilder());
+slider.addEventListener('input', () => gridBuilder());
 //toggle grid on or off
 toggleGrid.addEventListener('click', () => {
     if (grid === true) {
