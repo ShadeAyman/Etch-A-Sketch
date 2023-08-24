@@ -13,7 +13,7 @@ const clearButton = document.getElementById("clear");
 //-------------defualt values----------//
 let mouseDown = false;//to help with the click and drag functionality
 let grid = true;//to start with the grid highlited
-let color = "black"
+let color = "black";
 let brushType = "mainBrush";
 gridBuilder(slider.value, slider.value);
 sliderDisplay.innerHTML = slider.value + "x" + slider.value;
@@ -39,15 +39,16 @@ function deletElements() {
 //brush 2.0
 function brushPicker(e)//check for the used bursh and call its function
 {
-    if (brushType == "mainBrush") {
-        mainBrush(e);
-    }
-
-    if (brushType == "rainbowBrush") {
-        rainbowBrush(e);
-    }
-    if (brushType == "eracer") {
-        eracerBrush(e)
+    switch (brushType) {
+        case "mainBrush":
+            mainBrush(e);
+            break;
+        case "rainbowBrush":
+            rainbowBrush(e);
+            break;
+        case "eraser":
+            eraserBrush(e)
+            break;
     }
 }
 // the brushes
@@ -71,7 +72,7 @@ function rainbowBrush(e) {
     gridContainer.style.borderColor = randomcolor();
     header.style.color = randomcolor();
 }
-function eracerBrush(e) {
+function eraserBrush(e) {
     if (e.type === 'mouseover' && !mouseDown) return;
     e.target.style.backgroundColor = "white";
 }
@@ -120,7 +121,7 @@ rainbowBrushButton.addEventListener('click', () => {
     brushPicker;
 })
 eraserBrushButton.addEventListener('click', () => {
-    brushType = "eracer";
+    brushType = "eraser";
     brushPicker;
 })
 //Redrow the grid
