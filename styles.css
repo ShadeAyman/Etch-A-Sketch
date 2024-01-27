@@ -1,53 +1,103 @@
 /* ------------Genarics---------------- */
-@font-face { font-family: NerkoOne; src: url('NerkoOne-Regular.ttf'); } 
+@font-face {
+    font-family: NerkoOne;
+    src: url('NerkoOne-Regular.ttf');
+}
+
+:root {
+    --body-background-color: #F7F7F7;
+    --main-font-color: #393E46;
+    --reverse-highlight-background-color: #929AAB;
+    /* border-color */
+    /* hover button background color */
+    --main-highlight-background-color: #EEEEEE;
+    /* button background color */
+    /* hover button porder color */
+}
+
+.light {
+    --body-background-color: #F7F7F7;
+    --main-font-color: #393E46;
+    --reverse-highlight-background-color: #929AAB;
+    /* border-color */
+    /* hover button background color */
+    --main-highlight-background-color: #EEEEEE;
+    /* button background color */
+    /* hover button porder color */
+}
+
+.dark {
+    --body-background-color: #393E46;
+    --main-font-color: #F7F7F7;
+    --reverse-highlight-background-color: #EEEEEE;
+    /* border-color */
+    /* hover button background color */
+    --main-highlight-background-color: #929AAB;
+    /* button background color */
+    /* hover button porder color */
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #393E46;
+    color: var(--main-font-color);
     font-family: NerkoOne;
 }
 
-body
-{
-    background-color: #F7F7F7;
+body {
+    background-color: var(--body-background-color);
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
-button
-{
+
+button {
     box-sizing: border-box;
     padding: 8px 4px;
     border-radius: 20px;
     width: 150px;
-    background-color: #EEEEEE;
-    border-color: #929AAB;
+    background-color: var(--main-highlight-background-color);
+    border-color: var(--reverse-highlight-background-color);
+    color: var(--main-font-color);
     font-size: 1em;
     border-width: 4.0px;
-    
 }
-#mainBrush
-{
+
+#mainBrush {
     border-color: black;
     color: black;
 }
-button:hover
-{
-background-color:#929AAB ;
-border-color: #EEEEEE;
+
+button:hover {
+    background-color: var(--reverse-highlight-background-color);
+    border-color: var(--main-highlight-background-color);
+    color: black;
 }
 
+.nav {
+    display: grid;
+    grid-template-columns: 7fr 0.5fr;
+}
 
-/* --------------------------- */
 #header {
     display: flex;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    /* align-items: center; */
+    /* text-align: center; */
     padding: 20px;
     font-size: 4em;
+}
+
+#theme {
+    border-radius: 50%;
+    width: 60PX;
+    height: 60PX;
+    margin-right: 30px;
+    justify-self: end;
+    align-self: center;
+    /* font-size: 15PX;
+    padding: 2px; */
 }
 
 .body {
@@ -59,9 +109,7 @@ border-color: #EEEEEE;
 
 }
 
-
-.buttonscontainer
-{
+.buttonscontainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,14 +118,15 @@ border-color: #EEEEEE;
     padding: 20px;
     gap: 10px;
 }
-#colorpicker
-{
-    padding:0px;
+
+#colorpicker {
+    padding: 0px;
     width: 150px;
     height: 50px;
-    background-color: #EEEEEE;
-    border-color: #929AAB;
+    /* background-color: #EEEEEE;
+    border-color: #929AAB; */
 }
+
 #gridContainer {
     display: grid;
     flex-shrink: 0;
@@ -86,33 +135,36 @@ border-color: #EEEEEE;
     height: 450px;
     border-radius: 10px;
     padding: 10px;
-    border:solid ;
+    border: solid;
     border-width: 4px;
 }
-.cell
-{
+
+.cell {
     align-self: stretch;
 }
-.bordercell
-{
+
+.bordercell {
     color: #929AAB;
+    /* wont be changed */
     border: solid;
     border-width: 0.1px;
 }
-#slider
-{
+
+#slider {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 150px;
 }
-div>p{
+
+div>p {
     font-size: 20px;
 }
-p
-{
+
+p {
     text-align: center;
 }
+
 #footer {
     display: flex;
     justify-content: center;
@@ -121,25 +173,29 @@ p
     padding: 15px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-
-    background-color: #929AAB;
+    background-color: var(--reverse-highlight-background-color)
 }
 
-@media (max-width: 750px){
-    #header
-    {
+a {
+    text-decoration: none;
+}
+
+@media (max-width: 750px) {
+    #header {
         font-size: 3em;
 
     }
+
     #gridContainer {
         width: 380px;
         height: 380px;
     }
-.body{
-    flex-wrap: wrap;
-}
-    .buttonscontainer
-    {
+
+    .body {
+        flex-wrap: wrap;
+    }
+
+    .buttonscontainer {
         order: 2;
     }
 }

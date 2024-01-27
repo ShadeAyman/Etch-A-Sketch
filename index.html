@@ -11,10 +11,13 @@
     <script src="script.js" defer></script>
 </head>
 
-<body ondragstart="return false;" ondrop="return false;">
+<body id="mainBody" ondragstart="return false;" ondrop="return false;" class="light">
     <!-- to stop the browser from unintentionally dragging the div elments some time when clicking quicly -->
 
-    <header id="header">Etch-A-Sketch</header>
+    <div class="nav">
+        <header id="header">Etch-A-Sketch</header>
+        <button id="theme">Theme</button>
+    </div>
     <div class="body">
         <div class="buttonscontainer">
             <input type="color" id="colorpicker" value="#000000">
@@ -32,7 +35,9 @@
         </div>
     </div>
     <p class="note"> note: click and drag functionality only works on PCs ....for now</p>
-    <footer id="footer">Drawn-by-Shade</footer>
+    <a href="https://github.com/ShadeAyman/Etch-A-Sketch">
+        <footer id="footer">Drawn-by-Shade</footer>
+    </a>
 </body>
 
 </html>

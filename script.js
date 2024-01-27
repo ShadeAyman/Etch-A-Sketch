@@ -10,14 +10,24 @@ const mainBrushButton = document.getElementById("mainBrush");
 const rainbowBrushButton = document.getElementById("Rainbow");
 const eraserBrushButton = document.getElementById("eraser");
 const clearButton = document.getElementById("clear");
+const themebutton = document.getElementById("theme");
+const mainBody = document.getElementById("mainBody");
 //-------------defualt values----------//
 let mouseDown = false;//to help with the click and drag functionality
 let grid = true;//to start with the grid highlited
 let color = "black";
 let brushType = "mainBrush";
+let currentTheme = "light"; //add gest system theme later
 gridBuilder(slider.value, slider.value);
 sliderDisplay.innerHTML = slider.value + "x" + slider.value;
 //--------------functions--------------//
+//a function to change from light theme to dark theme
+function themeChanger(theme) {
+    mainBody.classList.remove(currentTheme);
+    mainBody.classList.add(theme);
+    currentTheme = theme;
+
+}
 //a function that builds the grid
 function gridBuilder(columns = slider.value, rows = slider.value) {
     deletElements();// to delete the old grid before generating it again
@@ -52,14 +62,12 @@ function brushPicker(e)//check for the used bursh and call its function
     }
 }
 // the brushes
-//////////////////////////////////////////////////////////////////////////
-//////the old brush function was not as good as i would like it to be////
-//////and i had to toggle between click to draw and hover to darw   ////
-//////after i saw this michalosman's code i understood how simple  ////
-////// it is to make a point and drag brush so i rewrote it       ////
-////// michalosman's code:                                       ////
-////// (https://github.com/michalosman/etch-a-sketch)           ////
-///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+////couldnt make click and drag drow function so i took some      ///
+////"inspiration" from michalosman's code                        ///
+//// michalosman's code:                                        ///
+//// (https://github.com/michalosman/etch-a-sketch)            ///
+/////////////////////////////////////////////////////////////////
 function mainBrush(e) {
     if (e.type === 'mouseover' && !mouseDown) return; //the idea is if iam not clicking over the element it wont draw unlike the old brush
     e.target.style.backgroundColor = color;
@@ -142,6 +150,16 @@ toggleGrid.addEventListener('click', () => {
     }
     toggleGridbutton()
 })
+themebutton.addEventListener('click', () => {
+    if (currentTheme == "light") {
+        themeChanger("dark");
+    }
+    else {
+        themeChanger("light");
+    }
+})
+
+
 //the rainbow colored header is taken from this stackoverflow
 //https://stackoverflow.com/questions/36793529/how-to-generate-rainbow-colored-text-in-javascript
 window.addEventListener("load", function () {
